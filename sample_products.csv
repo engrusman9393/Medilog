@@ -1,0 +1,11 @@
+productName,quantity,costPrice,shelfLocation,expiryDate
+Paracetamol 500mg,100,5.50,A1,2025-12-31
+Amoxicillin 250mg,50,12.00,A2,2024-06-15
+Vitamin C Tablets,200,8.75,B1,2026-03-20
+Ibuprofen 400mg,75,15.25,A3,2025-08-10
+Aspirin 325mg,150,3.80,B2,2025-11-25
+Cough Syrup 100ml,30,45.00,C1,2024-09-30
+Antacid Tablets,120,6.50,B3,2026-01-15
+Bandages Pack,80,25.00,D1,2027-05-20
+Thermometer Digital,25,150.00,E1,2030-12-31
+Blood Pressure Monitor,10,2500.00,E2,2028-06-30
