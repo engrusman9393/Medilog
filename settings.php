@@ -38,6 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'Database error: ' . $e->getMessage();
             }
         }
+    } elseif ($action === 'save_app_settings') {
+        $currency = $_POST['currency'] ?? 'PKR';
+        $expiry_alert_days = (int)($_POST['expiry_alert_days'] ?? 30);
+        $email_notifications = isset($_POST['email_notifications']) ? 1 : 0;
+        
+        try {
+            if (setUserCurrency($currency, $user['id'])) {
+                $db->setUserSetting($user['id'], 'expiry_alert_days', $expiry_alert_days);
+                $db->setUserSetting($user['id'], 'email_notifications', $email_notifications);
+                $message = 'Application settings saved successfully!';
+            } else {
+                $error = 'Failed to save settings';
+            }
+        } catch (Exception $e) {
+            $error = 'Error saving settings: ' . $e->getMessage();
+        }
     } elseif ($action === 'change_password') {
         $current_password = $_POST['current_password'] ?? '';
         $new_password = $_POST['new_password'] ?? '';
@@ -83,6 +99,11 @@ try {
 } catch (Exception $e) {
     $error = 'Failed to load user data';
 }
+
+// Get current settings
+$currentCurrency = getUserCurrency($user['id']);
+$expiryAlertDays = $db->getUserSetting($user['id'], 'expiry_alert_days', 30);
+$emailNotifications = $db->getUserSetting($user['id'], 'email_notifications', 1);
 ?>
 
 <?php if ($message): ?>
@@ -227,6 +248,8 @@ try {
         <h3 class="card-title">Application Settings</h3>
     </div>
     <div class="card-body">
+        <form method="POST" action="">
+            <input type="hidden" name="action" value="save_app_settings">
         <div class="form-row">
             <div class="form-group">
                 <label for="low_stock_threshold" class="form-label">Low Stock Alert Threshold</label>
@@ -236,17 +259,17 @@ try {
             
             <div class="form-group">
                 <label for="expiry_alert_days" class="form-label">Expiry Alert Days</label>
-                <input type="number" id="expiry_alert_days" class="form-control" value="30" min="1">
+                <input type="number" id="expiry_alert_days" name="expiry_alert_days" class="form-control" value="<?php echo $expiryAlertDays; ?>" min="1">
                 <small class="text-secondary">Alert when medicines expire within this many days</small>
             </div>
             
             <div class="form-group">
                 <label for="currency" class="form-label">Currency</label>
-                <select id="currency" class="form-control">
-                    <option value="PKR" selected>₨ Pakistani Rupee (PKR)</option>
-                    <option value="INR">₹ Indian Rupee (INR)</option>
-                    <option value="USD">$ US Dollar (USD)</option>
-                    <option value="EUR">€ Euro (EUR)</option>
+                <select id="currency" name="currency" class="form-control">
+                    <option value="PKR"<?php echo $currentCurrency === 'PKR' ? ' selected' : ''; ?>>₨ Pakistani Rupee (PKR)</option>
+                    <option value="INR"<?php echo $currentCurrency === 'INR' ? ' selected' : ''; ?>>₹ Indian Rupee (INR)</option>
+                    <option value="USD"<?php echo $currentCurrency === 'USD' ? ' selected' : ''; ?>>$ US Dollar (USD)</option>
+                    <option value="EUR"<?php echo $currentCurrency === 'EUR' ? ' selected' : ''; ?>>€ Euro (EUR)</option>
                     <option value="GBP">£ British Pound (GBP)</option>
                     <option value="JPY">¥ Japanese Yen (JPY)</option>
                     <option value="CNY">¥ Chinese Yuan (CNY)</option>
@@ -306,24 +329,27 @@ try {
         
         <div class="form-group">
             <div class="d-flex align-center gap-2">
-                <input type="checkbox" id="email_notifications" checked>
+                <input type="checkbox" id="email_notifications" name="email_notifications" value="1"<?php echo $emailNotifications ? ' checked' : ''; ?>>
                 <label for="email_notifications" class="form-label">Email Notifications</label>
             </div>
             <small class="text-secondary">Receive email alerts for low stock and expiring medicines</small>
         </div>
         
-        <button type="button" class="btn btn-secondary" onclick="saveAppSettings()">
-            <i class="fas fa-cog"></i>
-            Save Settings
-        </button>
+            <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-cog"></i>
+                Save Settings
+            </button>
+        </form>
     </div>
 </div>
 
 <script>
-function saveAppSettings() {
-    // This would save application settings
-    showAlert('success', 'Application settings saved successfully!');
-}
+// Initialize form values
+document.addEventListener('DOMContentLoaded', function() {
+    // Set current values from PHP
+    document.getElementById('expiry_alert_days').value = <?php echo $expiryAlertDays; ?>;
+    document.getElementById('email_notifications').checked = <?php echo $emailNotifications ? 'true' : 'false'; ?>;
+});
 
 // Password confirmation validation
 document.getElementById('confirm_password').addEventListener('input', function() {

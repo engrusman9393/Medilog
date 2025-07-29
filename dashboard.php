@@ -65,12 +65,12 @@ try {
 <!-- Stats Cards -->
 <div class="stats-grid">
     <div class="stat-card">
-        <div class="stat-value" id="todaySales">₹<?php echo number_format($todaySales['total']); ?></div>
+        <div class="stat-value" id="todaySales"><?php echo formatCurrency($todaySales['total']); ?></div>
         <div class="stat-label">Today's Sales (<?php echo $todaySales['count']; ?> orders)</div>
     </div>
     
     <div class="stat-card success">
-        <div class="stat-value" id="todayProfit">₹<?php echo number_format($todayProfit['profit']); ?></div>
+        <div class="stat-value" id="todayProfit"><?php echo formatCurrency($todayProfit['profit']); ?></div>
         <div class="stat-label">Today's Profit</div>
     </div>
     
@@ -110,7 +110,7 @@ try {
                                 <tr>
                                     <td><?php echo htmlspecialchars($sale['productName']); ?></td>
                                     <td><?php echo $sale['quantity']; ?></td>
-                                    <td>₹<?php echo number_format($sale['total_amount']); ?></td>
+                                    <td><?php echo formatCurrency($sale['total_amount']); ?></td>
                                     <td><?php echo date('M j, Y', strtotime($sale['sale_date'])); ?></td>
                                 </tr>
                             <?php endforeach; ?>

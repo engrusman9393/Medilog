@@ -18,5 +18,28 @@ class Database {
     public function getConnection() {
         return $this->conn;
     }
+    
+    // Get user setting with default fallback
+    public function getUserSetting($userId, $settingKey, $defaultValue = null) {
+        try {
+            $stmt = $this->conn->prepare("SELECT setting_value FROM user_settings_tbl WHERE user_id = ? AND setting_key = ?");
+            $stmt->execute([$userId, $settingKey]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            return $result ? $result['setting_value'] : $defaultValue;
+        } catch (Exception $e) {
+            return $defaultValue;
+        }
+    }
+    
+    // Set user setting
+    public function setUserSetting($userId, $settingKey, $settingValue) {
+        try {
+            $stmt = $this->conn->prepare("INSERT INTO user_settings_tbl (user_id, setting_key, setting_value, updated_at) VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE setting_value = ?, updated_at = NOW()");
+            return $stmt->execute([$userId, $settingKey, $settingValue, $settingValue]);
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
 ?>
