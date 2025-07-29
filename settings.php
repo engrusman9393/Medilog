@@ -243,10 +243,64 @@ try {
             <div class="form-group">
                 <label for="currency" class="form-label">Currency</label>
                 <select id="currency" class="form-control">
-                    <option value="INR" selected>₹ Indian Rupee (INR)</option>
+                    <option value="PKR" selected>₨ Pakistani Rupee (PKR)</option>
+                    <option value="INR">₹ Indian Rupee (INR)</option>
                     <option value="USD">$ US Dollar (USD)</option>
                     <option value="EUR">€ Euro (EUR)</option>
+                    <option value="GBP">£ British Pound (GBP)</option>
+                    <option value="JPY">¥ Japanese Yen (JPY)</option>
+                    <option value="CNY">¥ Chinese Yuan (CNY)</option>
+                    <option value="AUD">A$ Australian Dollar (AUD)</option>
+                    <option value="CAD">C$ Canadian Dollar (CAD)</option>
+                    <option value="CHF">Fr Swiss Franc (CHF)</option>
+                    <option value="SEK">kr Swedish Krona (SEK)</option>
+                    <option value="NOK">kr Norwegian Krone (NOK)</option>
+                    <option value="DKK">kr Danish Krone (DKK)</option>
+                    <option value="AED">د.إ UAE Dirham (AED)</option>
+                    <option value="SAR">﷼ Saudi Riyal (SAR)</option>
+                    <option value="QAR">﷼ Qatari Riyal (QAR)</option>
+                    <option value="KWD">د.ك Kuwaiti Dinar (KWD)</option>
+                    <option value="BHD">د.ب Bahraini Dinar (BHD)</option>
+                    <option value="OMR">﷼ Omani Rial (OMR)</option>
+                    <option value="EGP">£ Egyptian Pound (EGP)</option>
+                    <option value="TRY">₺ Turkish Lira (TRY)</option>
+                    <option value="ZAR">R South African Rand (ZAR)</option>
+                    <option value="NGN">₦ Nigerian Naira (NGN)</option>
+                    <option value="KES">KSh Kenyan Shilling (KES)</option>
+                    <option value="GHS">₵ Ghanaian Cedi (GHS)</option>
+                    <option value="BDT">৳ Bangladeshi Taka (BDT)</option>
+                    <option value="LKR">₨ Sri Lankan Rupee (LKR)</option>
+                    <option value="NPR">₨ Nepalese Rupee (NPR)</option>
+                    <option value="AFN">؋ Afghan Afghani (AFN)</option>
+                    <option value="MYR">RM Malaysian Ringgit (MYR)</option>
+                    <option value="SGD">S$ Singapore Dollar (SGD)</option>
+                    <option value="THB">฿ Thai Baht (THB)</option>
+                    <option value="IDR">Rp Indonesian Rupiah (IDR)</option>
+                    <option value="PHP">₱ Philippine Peso (PHP)</option>
+                    <option value="VND">₫ Vietnamese Dong (VND)</option>
+                    <option value="KRW">₩ South Korean Won (KRW)</option>
+                    <option value="HKD">HK$ Hong Kong Dollar (HKD)</option>
+                    <option value="TWD">NT$ Taiwan Dollar (TWD)</option>
+                    <option value="BRL">R$ Brazilian Real (BRL)</option>
+                    <option value="MXN">$ Mexican Peso (MXN)</option>
+                    <option value="ARS">$ Argentine Peso (ARS)</option>
+                    <option value="CLP">$ Chilean Peso (CLP)</option>
+                    <option value="COP">$ Colombian Peso (COP)</option>
+                    <option value="PEN">S/ Peruvian Sol (PEN)</option>
+                    <option value="RUB">₽ Russian Ruble (RUB)</option>
+                    <option value="PLN">zł Polish Zloty (PLN)</option>
+                    <option value="CZK">Kč Czech Koruna (CZK)</option>
+                    <option value="HUF">Ft Hungarian Forint (HUF)</option>
+                    <option value="RON">lei Romanian Leu (RON)</option>
+                    <option value="BGN">лв Bulgarian Lev (BGN)</option>
+                    <option value="HRK">kn Croatian Kuna (HRK)</option>
+                    <option value="ILS">₪ Israeli Shekel (ILS)</option>
+                    <option value="JOD">د.ا Jordanian Dinar (JOD)</option>
+                    <option value="LBP">ل.ل Lebanese Pound (LBP)</option>
+                    <option value="IRR">﷼ Iranian Rial (IRR)</option>
+                    <option value="IQD">ع.د Iraqi Dinar (IQD)</option>
                 </select>
+                <small class="text-secondary">Select your preferred currency for pricing and reports</small>
             </div>
         </div>
         
